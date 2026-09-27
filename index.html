@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Wuit Yi 💐</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Georgia, "Noto Serif Myanmar", serif;
+    background:
+      radial-gradient(circle at 20% 20%, #fff 0 2%, transparent 3%),
+      linear-gradient(135deg, #eadcff, #ffd9e8 50%, #fff1c9);
+    color: #4c3559;
+  }
+
+  .scene {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+  }
+
+  .hint {
+    position: absolute;
+    top: 8%;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #7d5d82;
+    animation: breathe 2s ease-in-out infinite;
+  }
+
+  .envelope-wrap {
+    position: relative;
+    width: min(360px, 82vw);
+    height: 260px;
+    cursor: pointer;
+    perspective: 1000px;
+    transition: transform .4s ease;
+  }
+  .envelope-wrap:hover { transform: translateY(-6px); }
+
+  .envelope {
+    position: absolute;
+    inset: 0;
+    background: #fffafc;
+    border-radius: 8px;
+    box-shadow: 0 20px 45px rgba(90,55,100,.22);
+    overflow: visible;
+  }
+
+  .envelope:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #f4d9e8;
+    clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+    z-index: 3;
+    border-radius: 8px;
+  }
+
+  .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 58%;
+    background: #f8cfe1;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 1s cubic-bezier(.2,.75,.2,1);
+    z-index: 5;
+  }
+
+  .seal {
+    position: absolute;
+    z-index: 7;
+    left: 50%;
+    top: 43%;
+    transform: translate(-50%,-50%);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #b86c91;
+    display: grid;
+    place-items: center;
+    color: white;
+    font-size: 25px;
+    box-shadow: 0 5px 15px rgba(100,40,80,.25);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+
+  .letter {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+    width: 88%;
+    height: 88%;
+    background: #fffdf8;
+    border-radius: 8px;
+    padding: 22px 20px;
+    box-shadow: 0 8px 25px rgba(80,50,70,.12);
+    overflow-y: auto;
+    transition: transform 1.1s cubic-bezier(.2,.8,.2,1), z-index 0s .3s;
+  }
+
+  .letter h1 {
+    margin: 0 0 10px;
+    text-align: center;
+    font-size: 24px;
+    color: #a14e79;
+  }
+
+  .letter p {
+    margin: 0;
+    white-space: pre-line;
+    line-height: 1.75;
+    font-size: 14px;
+  }
+
+  .open .flap { transform: rotateX(180deg); z-index: 1; }
+  .open .letter {
+    transform: translate(-50%, -63%);
+    z-index: 6;
+  }
+  .open .seal {
+    opacity: 0;
+    transform: translate(-50%,-50%) scale(.5);
+  }
+
+  .photo {
+    position: absolute;
+    width: 122px;
+    height: 132px;
+    padding: 6px 6px 18px;
+    background: white;
+    box-shadow: 0 8px 22px rgba(65,40,70,.22);
+    object-fit: cover;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity .8s ease, transform 1s ease;
+    z-index: 8;
+  }
+  .photo1 { left: -25px; top: 25px; transform: rotate(-9deg) translateY(20px); }
+  .photo2 { right: -28px; top: 55px; transform: rotate(8deg) translateY(20px); }
+  .photo3 { left: 50%; bottom: -30px; transform: translateX(-50%) rotate(-3deg) translateY(20px); }
+
+  .open .photo { opacity: 1; }
+  .open .photo1 { animation: float1 4s ease-in-out infinite; }
+  .open .photo2 { animation: float2 4.6s ease-in-out infinite; }
+  .open .photo3 { animation: float3 5s ease-in-out infinite; }
+
+  .hearts { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    animation: rise linear forwards;
+    opacity: .75;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 18px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #856f88;
+  }
+
+  @keyframes rise {
+    to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+  @keyframes breathe {
+    50% { opacity: .5; transform: translateY(3px); }
+  }
+  @keyframes float1 {
+    0%,100% { transform: rotate(-9deg) translateY(0); }
+    50% { transform: rotate(-5deg) translateY(-13px); }
+  }
+  @keyframes float2 {
+    0%,100% { transform: rotate(8deg) translateY(0); }
+    50% { transform: rotate(12deg) translateY(-15px); }
+  }
+  @keyframes float3 {
+    0%,100% { transform: translateX(-50%) rotate(-3deg) translateY(0); }
+    50% { transform: translateX(-50%) rotate(3deg) translateY(-12px); }
+  }
+
+  @media (max-width: 500px) {
+    .envelope-wrap { width: 86vw; height: 235px; }
+    .photo { width: 72px; height: 90px; padding-bottom: 14px; }
+    .photo1 { left: -8px; }
+    .photo2 { right: -8px; }
+    .letter { padding: 17px 15px; }
+    .letter h1 { font-size: 21px; }
+    .letter p { font-size: 12px; line-height: 1.65; }
+  }
+</style>
+</head>
+
+<body>
+<div class="scene">
+  <div class="hint">Tap the envelope to open your birthday surprise 💌</div>
+
+  <div class="envelope-wrap" id="card" onclick="openCard()">
+    <!-- Replace these 3 image filenames with your own photos -->
+    <img class="photo photo1" src="birthday.jpg" alt="Photo 1">
+    <img class="photo photo2" src="pic1.jpg" alt="Photo 2">
+    <img class="photo photo3" src="pic2.jpg" alt="Photo 3">
+
+    <div class="envelope">
+      <div class="letter">
+        <h1>Happy Birthday, Wuit Yi 💐</h1>
+        <p>Happy birthday par bibi💐
+အချိန်တွေမြန်လာလိုက်တာ 18နှစ်တောင်ပြည့်သွားပြီနော်
+
+
+အမြဲတမ်းကျောင်း အကြောင်းကိုပြန်တွေးမိတိုင်း တို့အဖွဲ့ရဲ့ အလွဲတွေ၊ မကြီး ဘေးနားထိုင်ရင်း ရီခဲ့တဲ့အချိန်လေးတွေ၊ စာအတူတူ တွက်ခဲ့တာ၊ bright အကြောင်း ထွေရာလေးပါးပြောခဲ့ဟာလေးတွေ ပြန်လွမ်းလာတယ်
+
+အခုထပ်ထိ အဆက်အသွယ်မပြတ်ပဲ မကြီးတစ်ယောက်လို ခင်လာပေးလို့ ကျေးဇူးပါနော်
+နောက်လည်း CEO ကြီးဖြစ်နိုင်ပါစေ, gay club လည်းထောင်နိုင်ပါစေ (ဟဲ စတာပါ)😝
+ဒီထပ်မက ရုပ်ချောပြီး ပေါတောတောနေနိုင်ပါစေ၊ online shoppee လည်းရောင်းကောင်းပြီး ချစ်ရတဲ့သူငယ်ချင်းကော ရဲစားလေးနဲ့ရော ပျော်ပျော်ပါးပါးနေနိုင်ပါစေ 💗
+
+Happy 18th! 🎂✨
+— With love 💐</p>
+      </div>
+      <div class="flap"></div>
+      <div class="seal">♥</div>
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+  <div class="footer">made with love 💗</div>
+</div>
+
+<script>
+let opened = false;
+
+function openCard() {
+  if (opened) return;
+  opened = true;
+  document.getElementById("card").classList.add("open");
+
+  // Start the heart animation after the envelope opens.
+  setInterval(createHeart, 450);
+  for (let i = 0; i < 12; i++) {
+    setTimeout(createHeart, i * 120);
+  }
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = ["♥","♡","💗","💕","✦"][Math.floor(Math.random()*5)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (12 + Math.random() * 18) + "px";
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+  document.getElementById("hearts").appendChild(heart);
+  setTimeout(() => heart.remove(), 11000);
+}
+</script>
+</body>
+</html>
